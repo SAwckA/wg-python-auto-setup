@@ -53,9 +53,9 @@ PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -
 
     print('systemd daemon')
 
-    # run('systemctl enable wg-quick@wg0.service')
-    # run('systemctl start wg-quick@wg0.service')
-    # run('systemctl status wg-quick@wg0.service')
+    run('systemctl enable wg-quick@wg0.service')
+    run('systemctl start wg-quick@wg0.service')
+    run('systemctl status wg-quick@wg0.service')
 
 if __name__ == "__main__":
     # if not file_exists('./wg0.conf'):
