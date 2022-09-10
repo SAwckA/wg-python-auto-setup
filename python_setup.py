@@ -57,13 +57,9 @@ PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -
     run('systemctl start wg-quick@wg0.service')
     run('systemctl status wg-quick@wg0.service')
 
+    print('setup ip forward')
+    run('echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf')
+    run('sysctl -p')
+
 if __name__ == "__main__":
-    # if not file_exists('./wg0.conf'):
-    #     setup()
-
     setup()
-
-# subprocess.call(['wg','genkey'])
-#  '|', 'wg', 'pubkey', '|', 'tee', './server_publickey'])
-
-# subprocess.call(['ls', '-la'])
