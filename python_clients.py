@@ -74,3 +74,6 @@ with open('./wg0.conf', 'a') as config:
     config.seek(0, 2)
     config.write(new_config_peer)
     config.close()
+
+run("systemctl restart wg-quick@wg0")
+run("systemctl status wg-quick@wg0")
