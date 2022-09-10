@@ -5,6 +5,11 @@ from xmlrpc import client
 
 from python_setup import run, file_exists, key_reader, write_file
 
+import subprocess
+
+EXTERNAL_IP = str(subprocess.check_output('dig +short myip.opendns.com @resolver1.opendns.com', shell=True))
+EXTERNAL_IP = EXTERNAL_IP.replace("\\", '').replace('n', '').replace("'", '').replace('b', '')
+
 def format_last_ip(ip:str) -> str:
     ip = ip.split()
     return f"{ip[0]}.{ip[1]}.{ip[2]}.{ip[3]}/32"
@@ -57,7 +62,7 @@ DNS = 8.8.8.8
 
 [Peer]
 PublicKey = {key_reader('./server_publickey')}
-Endpoint = 1.1.1.1:51830
+Endpoint = {EXTERNAL_IP}:51830
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 20"""
 
