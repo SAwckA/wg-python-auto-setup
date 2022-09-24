@@ -2,6 +2,7 @@ from pydoc import cli
 from random import choice
 from string import ascii_uppercase
 from xmlrpc import client
+import os
 
 from python_setup import run, file_exists, key_reader, write_file
 
@@ -80,5 +81,5 @@ with open('./wg0.conf', 'a') as config:
     config.write(new_config_peer)
     config.close()
 
-run("systemctl restart wg-quick@wg0")
+os.system('CMD="wg syncconf wg0 <(wg-quick strip wg0)"')
 run("systemctl status wg-quick@wg0")
